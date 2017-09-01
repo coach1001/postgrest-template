@@ -1,0 +1,38 @@
+{
+  "SERVER_PORT": 3005,
+  "POSTGREST": {
+    "BASE_URL": "http://localhost:3004",
+    "JWT": {
+      "SECRET": ".Y|E%BEl{>TfcLsY@NF9#XfK&SX.ge4>7V{T&KxH6OX<dxomk84hf*ZDgFULw1%",
+      "USER_ID_CLAIM": "uid",
+      "ROLE_CLAIM": "role"
+    },
+    "FILE": {
+      "SCHEMA": "public",
+      "TABLE": "files",
+      "COLUMNS": {
+        "CREATOR_ID": "creator_id",
+        "OWNER_ID": "owner_id",
+        "FILE_ID": "file_id",
+        "FILE_URL": "file_url"
+      }
+    },
+    "EMAIL": {
+      "SCHEMA": "public",
+      "TABLE": "emails",
+      "COLUMNS": {
+        "FROM": "from",
+        "TO": "to",
+        "REPLY_TO": "reply_to",
+        "SUBJECT": "subject",
+        "BODY": "body",
+        "ATTACHMENT_URL": "file_url"
+      },
+      "SERVICE": {
+        "NAME": "google",
+        "USER_NAME": "coach1001@gmail.com",
+        "PASSWORD": "Soulreaver1"
+      }
+    }
+  }
+}
