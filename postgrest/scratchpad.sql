@@ -19,17 +19,22 @@ set role postgres;*/
 
 --IMPORTANT
 --CREATE POLICY file_select_all ON files FOR SELECT USING (true)
+--CREATE POLICY file_insert ON files FOR INSERT TO anon WITH CHECK (true)
 
 --IMPORTANT
 --CREATE POLICY file_update ON files FOR UPDATE 
 --USING (current_setting('request.jwt.claim.uid'::text) = creator_id)  
 --WITH CHECK (current_setting('request.jwt.claim.uid'::text) = creator_id);
 
-DROP POLICY file_update on FILES;
-CREATE POLICY file_update ON files FOR UPDATE 
-USING (current_setting('request.jwt.claim.uid'::text) = creator_id)  
-WITH CHECK (current_setting('request.jwt.claim.uid'::text) = creator_id);
-select * from pg_policies;
+--DROP POLICY file_insert on FILES;
+--CREATE POLICY file_update ON files FOR UPDATE 
+--USING (current_setting('request.jwt.claim.uid'::text) = creator_id)  
+--WITH CHECK (current_setting('request.jwt.claim.uid'::text) = creator_id);
+--CREATE POLICY file_update ON files FOR INSERT 
+--USING (current_setting('request.jwt.claim.uid'::text) = creator_id)  
+--WITH CHECK (current_setting('request.jwt.claim.uid'::text) = creator_id);
+
+--select * from pg_policies;
 --DROP POLICY files_read on files;
 --CREATE POLICY files_read on files for SELECT to PUBLIC;
 --DROP POLICY file_update on files;
