@@ -34,19 +34,19 @@ const deleteFileRequest = {
 }
 
 app.post('/api/file', multipartyMiddleware, function(req_, res_) {
+  const fileRequest = req_.files.null;
 
-  storage.insert(req_.files.file.originalFilename, req_.files.file.path , function(err,id,stat){
+  storage.insert(fileRequest.originalFilename, fileRequest.path , function(err,id,stat){
     const req__ = Object.assign({}, createFileRequest);
     req__.headers.authorization = req_.headers.authorization;
     req__.json = {
-         file: id,
+         file_id: id,
          created_on: new Date()
-     }
-     console.log(req__);
+     }     
      request(req__, function (err, res, body){
-
-      if(err){
-        fs.unlink(req_.files.file.path, function(err){
+      console.log(body);
+      if(err || res.statusCode > 399){
+        fs.unlink(fileRequest.path, function(err){
             storage.remove(id);
             if(err){
               res_.status(500).json({fileId: null, message: 'Server Error'})
@@ -56,7 +56,7 @@ app.post('/api/file', multipartyMiddleware, function(req_, res_) {
 
         });
       }else{
-        fs.unlink(req_.files.file.path, function(err){
+        fs.unlink(fileRequest.path, function(err){
             if(err){
               res_.status(500).json({fileId: null, message: 'Server Error'})
             }else{
@@ -66,6 +66,7 @@ app.post('/api/file', multipartyMiddleware, function(req_, res_) {
       }
     })
 	});
+
 });
 
 app.patch('/api/file?:fileId', multipartyMiddleware, function(req, res) {
@@ -94,10 +95,14 @@ app.delete('/api/file?:fileId',function(req,res){
 
 app.get('/api/file/list',function(req,res){
 	storage.listing(function(err,arr){
-    if(err){
+    if(err){      
       res.status(500).json({files: null, message: 'File List Retrieval Failed'})
     } else {
-      res.status(200).json({files: arr, message: 'File List Retrieval Succeeded'});
+      const fileArray=[];      
+      arr[0].split('\n').map( function(file,index){
+        fileArray.push(JSON.parse(file));
+      });
+      res.status(200).json({files: fileArray, message: 'File List Retrieval Succeeded'});
     }
 
 	});
