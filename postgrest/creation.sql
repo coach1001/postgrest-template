@@ -27,7 +27,7 @@ ALTER SCHEMA basic_authentication OWNER TO postgres;
 
 --
 -- TOC entry 1 (class 3079 OID 12393)
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
@@ -36,7 +36,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 --
 -- TOC entry 2215 (class 0 OID 0)
 -- Dependencies: 1
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -44,7 +44,7 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 --
 -- TOC entry 3 (class 3079 OID 16442)
--- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner: 
+-- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
@@ -53,7 +53,7 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
 --
 -- TOC entry 2216 (class 0 OID 0)
 -- Dependencies: 3
--- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
@@ -61,7 +61,7 @@ COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
 
 --
 -- TOC entry 2 (class 3079 OID 16479)
--- Name: pgjwt; Type: EXTENSION; Schema: -; Owner: 
+-- Name: pgjwt; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS pgjwt WITH SCHEMA public;
@@ -70,7 +70,7 @@ CREATE EXTENSION IF NOT EXISTS pgjwt WITH SCHEMA public;
 --
 -- TOC entry 2217 (class 0 OID 0)
 -- Dependencies: 2
--- Name: EXTENSION pgjwt; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION pgjwt; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION pgjwt IS 'JSON Web Token API for Postgresql';
@@ -171,8 +171,8 @@ begin
     raise invalid_password using message = 'Invalid Email Or Password';
   end if;
 
-  select basic_authentication.users.uid, basic_authentication.users.verified into _uid,_verified 
-  from basic_authentication.users 
+  select basic_authentication.users.uid, basic_authentication.users.verified into _uid,_verified
+  from basic_authentication.users
   where basic_authentication.users.email = login.email limit 1;
 
   if _verified = false then
@@ -418,4 +418,3 @@ GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE files TO file_uploader;
 --
 -- PostgreSQL database dump complete
 --
-
